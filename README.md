@@ -41,7 +41,7 @@ Marcus Vinicius Couto, Marco Tulio Valente, and Eduardo Figueiredo. <A HREF="htt
 <p>At the moment, we are using pre-processor directives in order to modularize and delimit our feature's code. Currently, our implementation is based on the <a href="http://www.slashdev.ca/javapp/">javapp</a> pre-processor.</p>
 
 <P>
-<B>Examples of Products:</B>
+<B>Examples of Products</B>
 
 <ul>
 
