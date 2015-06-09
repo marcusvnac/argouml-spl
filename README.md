@@ -23,6 +23,8 @@ Logging: "The purpose of debug log and trace messages is to provide a mechanism 
 
 </OL>
 
+<center><img align="middle" alt="ArgoUML-SPL Feature Model" src="https://github.com/ASERG-UFMG/argouml-spl/blob/master/ArgoUML-SPL_FeatureModel.png"></center>
+
 
 <B> Research Paper</B>
 
