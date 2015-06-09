@@ -28,7 +28,7 @@ Logging: "The purpose of debug log and trace messages is to provide a mechanism 
 
 <img align="middle" alt="ArgoUML-SPL Feature Model" src="https://github.com/ASERG-UFMG/argouml-spl/blob/master/ArgoUML-SPL_FeatureModel.png"></center>
 
-
+<P>
 <B> Research Paper</B>
 
 Marcus Vinicius Couto, Marco Tulio Valente, and Eduardo Figueiredo. <A HREF="http://homepages.dcc.ufmg.br/~mtov/pub/2011_csmr_argouml.pdf"> Extracting Software Product Lines: A Case Study Using Conditional Compilation</A>. In 15th European Conference on Software Maintenance and Reengineering (CSMR), pages 191-200, 2011.
