@@ -5,7 +5,9 @@ ArgoUML-SPL is a project that aims to extract a SPL from the current ArgoUML cod
 
 At the moment, we have already modularized the following features:
 
-Design Critics: "Simple agents that continuously execute in a background thread of control. They analyze the design as the designer is working and suggest possible improvements. These suggestions range from indications of syntax errors, to reminders to return to parts of the design that need finishing, to style guidelines, to the advice of expert designers."
+<UL>
+
+<LI> Design Critics: "Simple agents that continuously execute in a background thread of control. They analyze the design as the designer is working and suggest possible improvements. These suggestions range from indications of syntax errors, to reminders to return to parts of the design that need finishing, to style guidelines, to the advice of expert designers."
 
 State Diagrams: "State diagrams are used to describe the behavior of a system. State diagrams describe all of the possible states of an object as events occur. Each diagram usually represents objects of a single class and track the different states of its objects through the system."
 
@@ -19,3 +21,5 @@ Collaboration Diagrams: "Collaboration diagrams are used to show how objects int
 
 Deployment Diagrams: "A deployment diagram models the run-time architecture of a system. It shows the configuration of the hardware elements (nodes) and shows how software elements and artifacts are mapped onto those nodes."
 Logging: "The purpose of debug log and trace messages is to provide a mechanism that allows the developer to enable output of minor events focused on a specific problem area and to follow what is going on inside ArgoUML."
+
+</UL>
