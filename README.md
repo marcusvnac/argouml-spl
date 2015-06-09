@@ -23,3 +23,7 @@ At the moment, we have already modularized the following features:
 Logging: "The purpose of debug log and trace messages is to provide a mechanism that allows the developer to enable output of minor events focused on a specific problem area and to follow what is going on inside ArgoUML."
 
 </UL>
+
+## Research Paper
+
+Marcus Vinicius Couto, Marco Tulio Valente, and Eduardo Figueiredo. Extracting Software Product Lines: A Case Study Using Conditional Compilation. In 15th European Conference on Software Maintenance and Reengineering (CSMR), pages 191-200, 2011
