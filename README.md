@@ -27,4 +27,23 @@ Logging: "The purpose of debug log and trace messages is to provide a mechanism 
 
 <B> Research Paper</B>
 
-Marcus Vinicius Couto, Marco Tulio Valente, and Eduardo Figueiredo. <A HREF="http://homepages.dcc.ufmg.br/~mtov/pub/2011_csmr_argouml.pdf"> Extracting Software Product Lines: A Case Study Using Conditional Compilation</A>. In 15th European Conference on Software Maintenance and Reengineering (CSMR), pages 191-200, 2011
+Marcus Vinicius Couto, Marco Tulio Valente, and Eduardo Figueiredo. <A HREF="http://homepages.dcc.ufmg.br/~mtov/pub/2011_csmr_argouml.pdf"> Extracting Software Product Lines: A Case Study Using Conditional Compilation</A>. In 15th European Conference on Software Maintenance and Reengineering (CSMR), pages 191-200, 2011.
+
+<p>
+<B>Feature Extraction Mechanism</B>
+
+<p>At the moment, we are using pre-processor directives in order to modularize and delimit our feature's code. Currently, our implementation is based on the <a href="http://www.slashdev.ca/javapp/">javapp</a> pre-processor.</p>
+
+<P>
+<B>Examples of Products:</B>
+<ul>
+	<li><a href="http://argouml-spl.tigris.org/downloads/argouml-spl_full.zip">Product 1: Full ArgoUML application</a> (including the four mentioned features) 
+		<p>Size: 120,348 TLOC - ZIP File (6,458,926 bytes)</p>
+	</li>
+	<li><a href="http://argouml-spl.tigris.org/downloads/argouml-spl_no-features.zip">Product 2: ArgoUML without the eight mentioned features</a> 
+		<p>Size: 82,924 TLOC - ZIP File (6,028,146 bytes)</p>
+	</li>
+	<li><a href="http://argouml-spl.tigris.org/downloads/argouml-spl_no-cognitive.zip">Product 3: ArgoUML without Design Critics feature</a> 
+		<p>Size: 104,029 TLOC - ZIP File (6,105,454 bytes)</p>
+	</li>	
+</ul>
