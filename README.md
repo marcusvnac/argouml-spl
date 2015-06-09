@@ -1,5 +1,4 @@
 # argouml-spl
-A product line variant of ArgoUML
 
 ArgoUML-SPL is a project that aims to extract a SPL from the current ArgoUML codebase.
 
