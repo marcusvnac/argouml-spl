@@ -1,0 +1,313 @@
+PREMISSAS:
+	- Não haverá tratamento nas classes de testes (fonte gerado não terá jUnits);
+	- Marcação da granularidade do código da feature:
+			//@#$LPS-FEATURE:GranularityType:TIPOGRANULARIDADE, no qual FEATURE deverá ser substituído por uma das 
+				features (COGNITIVE, ACTIVITYDIAGRAM, STATEDIAGRAM, LOGGING) e TIPOGRANULARIDADE deverá ser substituído pelos tipos definidos abaixo.
+				
+		- Tipos de granularidade:
+			- Package (Pacote inteiro - todas as classes. Se houver uma classe do pacote que não deve ser marcada, todas devem ser marcadas como Class)
+			- Import (Se houver mais de um import em sequência, contar uma vez - Bloco)
+			- Class
+			- ClassSignature (Quando se altera um "extend", "implements" em uma classe)
+			- Interface (Uma interface inteira)
+			- InterfaceMethod (Alteração de uma métodos de interface)
+			- Method (Assinatura + corpo)
+			- MethodBody (Apenas corpo do método)
+			- MethodSignature (Quando altera os arqumentos do métodos)
+			- MethodCall (Quando se altera os arqumentos de uma chamada de método)
+			- Field (Campo de uma classe. Deverá contar todos os campos)	
+			- Variable (Variável dentro de um método)	
+			- Expression (Quando se altera uma expressão booleana (if ou return))
+			- Command (Comandos de atribuição, chamada de método, comandos for, if, else if, else, while - Bloco)
+					Para um bloco de comandos, contar apenas uma vez.
+					Por ex., para um if, contar somente o if, ou vários comandos consecutivos, contar apenas um comando
+			- Enumeration (Alteração em elementos de uma enumeração)
+			- StaticInitialization (Inicialização estática de vetores - Bloco)
+		
+	- Marcar localização do código da Feature:
+			//@#$LPS-FEATURE:Localization:TIPOLOCALIZAÇÃO, no qual FEATURE deverá ser substituído por uma das 
+				features (COGNITIVE, ACTIVITYDIAGRAM, STATEDIAGRAM, LOGGING) e TIPOLOCALIZAÇÃO deverá ser substituído pelos tipos definidos abaixo.
+		
+		Tipos de localização (considerar o bloco):
+			- StartMethod (Início de método)
+			- EndMethod (Fim de método)
+			- EntireMethod (Quando a marcação ocupa o método todo)
+			- BeforeReturn (Antes de um return - Return não está marcado, mas o código imediatamente anterior está, não apenas sintaticamente antes, mas logicamente)
+			- StartStaticBlock (Início de um bloco estático)
+			- EndStaticBlock (Final de um bloco estático)
+			- EntireStaticBlock (Bloco estático inteiro)
+			- InsideStaticBlock (Dentro de um bloco estático)
+			- NestedCommand (Um comando aninhado marcado dentro de um comando não aninhado. Exceto para blocos try/catch)
+					Ex.: 	Comando	-> Este comando não está marcado
+								Comando -> Este comando está marcado, contar como NestedCommand
+
+***********************************************************************************************************************************************************
+FEATURES IDENTIFICADAS:
+	1) Cognitive/Critics/ToDoItem *
+	2) Diagrama de Atividades (ActivityDiagram) *
+	3) Diagrama de Estado (UMLStateDiagram) *
+	4) Logging *
+	5) Diagrama de Colaboração (CollaborationDiagram)
+	6) Diagrama de Implantação (DeploymentDiagram)
+	7) Diagrama de Sequência (SequenceDiagram)
+	8) Diagrama de Casos de Uso (UseCaseDiagram)
+	9) Diagrama de Classe (ClassDiagram)
+   10) Geração de Código
+   11) Suporte a outras linguagens
+   12) Importação e Exportação de XMI (Import-ExportXMI)
+
+***********************************************************************************************************************************************************
+FEATURES DEFINIDAS:
+
+1) Cognitive/Critics/ToDoItem (ToDo também devido a dependência existente entre estas funcionalidades):
+
+	Pacotes e classes não utilizadas:
+		org.argouml.cognitive.*					-> /argouml-app/src/org/argouml/cognitive	
+		org.argouml.uml.cognitive.*				-> /argouml-app/src/org/argouml/uml/cognitive
+		org.argouml.pattern.cognitive.critics.*	-> /argouml-app/src/org/argouml/pattern/cognitive/critics		
+		org.argouml.profile.internal.ui.*		-> /argouml-app/src/org/argouml/profile/internal/ui		
+
+		/argouml-app/src/org/argouml/application/StartCritics.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoCriticsToCritic.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoProfileToCritics.java		
+		/argouml-app/src/org/argouml/profile/internal/ocl/CrOCL.java		
+		/argouml-app/src/org/argouml/persistence/ResolvedCriticXMLHelper.java
+		/argouml-app/src/org/argouml/persistence/TodoListMemberFilePersister.java
+		/argouml-app/src/org/argouml/persistence/ToDoItemXMLHelper.java
+		/argouml-app/src/org/argouml/persistence/TodoParser.java
+		
+		tests/org.argouml.cognitive.*					-> /argouml-app/tests/org/argouml/cognitive		
+		tests/org.argouml.uml.cognitive.critics.*		-> /argouml-app/tests/org/argouml/uml/cognitive/critics		
+		/argouml-app/tests/org/argouml/ui/TestDetailsPane.java
+		/argouml-app/tests/org/argouml/profile/internal/ocl/TestCrOCL.java
+		/argouml-app/tests/org/argouml/profile/internal/ocl/TestCrOCL2.java		
+		
+	Remover manualmente (não aceita comentários) do arquivo /argouml-app/META-INF/MANIFEST.MF as linhas que contêm as informações:
+		 org.argouml.cognitive,
+		 org.argouml.cognitive.checklist,
+		 org.argouml.cognitive.checklist.ui,
+		 org.argouml.cognitive.critics,
+		 org.argouml.cognitive.critics.ui,
+		 org.argouml.cognitive.ui,
+		 ...
+		org.argouml.pattern.cognitive,
+		org.argouml.pattern.cognitive.critics,
+		...
+		org.argouml.uml.cognitive,
+		org.argouml.uml.cognitive.checklist,
+		org.argouml.uml.cognitive.critics,
+		
+	CIDE: Demais partes do código comentado com :  /* @#$-LPSFeature: Critic/Cognitive %INIT% .......... @#$-LPSFeature: Critic/Cognitive %END% */
+	
+	
+	Projetos: 	argouml-app
+	
+	CC: 
+		//#if defined(COGNITIVE)
+		//#endif
+		
+	Parâmetros de chamada de função:
+		Main.java			->  linha 853
+		ProfileLoader.java	->	linha 152
+		
+	Método inteiro:
+		ProfileLoader.java	-> Linha 199
+		ProfileMeta.java	-> 86
+		ProfileUML.java			-> 124
+		UserDefinedProfile.java	-> 289
+		GenericArgoMenuBar.java	-> 880
+		FigEdgeModelElement.java	-> 491
+		FigNodeModelElement.java	-> 929
+	
+	Corpo de Método inteiro:
+		ProfileManagerImpl.java	-> 448
+		FigEdgeModelElement.java	-> 436
+		FigNodeModelElement.java	-> 891
+		
+	Propriedade de classe com get e set:
+		Profile.java
+		
+	Assinatura de método:
+		UserDefinedProfile.java	-> 164
+		
+	Interface:
+		Clarifier.java
+		
+	Assinatura de classe (remoção de um implements):
+		FigEdgeModelElement
+		FigNodeModelElement
+	
+	If composto (expressão):
+		TabProps.java	-> 179
+		
+	Return booleano composto:
+		TabProps.java	-> 342
+		
+	Alteração de código:
+		Main.java		-> 850
+	
+================================================================================================================================================	
+
+2) Diagrama de Atividades (ActivityDiagram)
+	
+	Pacotes e classes não utilizadas:		
+		org.argouml.uml.diagram.activity.*	-> EXCETO /argouml-app/src/org/argouml/uml/diagram/activity/ui/SelectionActionState.java
+		/argouml-app/src/org/argouml/uml/ui/ActionActivityDiagram.java
+		/argouml-core-model/src/org/argouml/model/ActivityGraphsHelper.java
+		/argouml-core-model/src/org/argouml/model/ActivityGraphsFactory.java
+		/argouml-core-model/src/org/argouml/model/ActivityDiagram.java		
+		/argouml-core-model/src/org/argouml/model/AbstractActivityGraphsHelperDecorator.java
+		/argouml-core-model-euml/src/org/argouml/model/euml/ActivityGraphsFactoryEUMLlImpl.java
+		/argouml-core-model-euml/src/org/argouml/model/euml/ActivityGraphsHelperEUMLImpl.java
+		/argouml-core-model-mdr/src/org/argouml/model/mdr/ActivityGraphsFactoryMDRImpl.java
+		/argouml-core-model-mdr/src/org/argouml/model/mdr/ActivityGraphsHelperMDRImpl.java		
+		/argouml-core-model-mdr/src/org/argouml/model/mdr/UndoActivityGraphsHelperDecorator.java
+		
+		/argouml-app/tests/org/argouml/uml/ui/TestActionActivityGraphDiagram.java
+		/argouml-app/tests/org/argouml/uml/diagram/activity/ui/TestUMLActivityDiagram.java
+		/argouml-app/tests/org/argouml/model/TestActivityGraphStateMachine.java
+		/argouml-app/tests/org/argouml/model/TestActivityGraphsFactory.java	
+		/argouml-app/tests/org/argouml/model/TestActivityGraphsHelper.java
+		/argouml-app/tests/org/argouml/model/TestAGHelperWithMock.java		
+		
+
+	Remover manualmente (não aceita comentários) do arquivo /argouml-app/META-INF/MANIFEST.MF as linhas que contêm as informações:
+		org.argouml.uml.diagram.activity.layout,
+		org.argouml.uml.diagram.activity.ui,
+		
+	CIDE: Demais partes do código comentado com :  /* @#$-LPSFeature: ActivityDiagram %INIT% .......... @#$-LPSFeature: ActivityDiagram %END% */
+	
+	Projetos: 	argouml-app
+				argouml-core-model
+				argouml-core-model-euml
+				argouml-core-model-mdr
+	
+	CC:
+		Defined: ACTIVITYDIAGRAM
+			//#if defined(ACTIVITYDIAGRAM)
+			//#endif
+			
+			
+		Marcar fechamento de chave:
+			ModelMemberFilePersister.java 			-> 364
+			ObjectFlowStateStateNotationUml.java	-> 167
+			
+		If composto:
+			GoNamespaceToDiagram.java				-> 74
+			ExplorerPopup.java						-> 264
+			ArgoDiagramImpl.java					-> 398
+			DiagramFactory.java						-> 212
+			ActionLayout.java						-> 81
+		
+		Ifdef aninhado:
+			GoNamespaceToDiagram					81 (STATEDIAGRAM)
+			GoStatemachineToDiagram.java			-> STATEDIAGRAM
+			UMLStateDiagram.java					-> STATEDIAGRAM
+			UMLActivityDiagram.java					400, 585, 868, 880 (STATEDIAGRAM)
+			
+		Método inteiro:
+			SelectionActionState.java				-> 129
+			UmlFactoryMDRImpl.java					-> 760
+			
+		Corpo de Método inteiro:	
+			PropPanelClassifierInState.java			-> 267
+			PropPanelObjectFlowState.java			-> 257, 410
+			PropPanelPartition.java					-> 123
+		
+		OR de ifdefs
+			StateDiagramGraphModel.java				1 (UMLStateDiagram)
+			StateDiagramRenderer.java				1 (UMLStateDiagram)
+			FigStateVertex.java						1 (UMLStateDiagram)
+			FigFinalState							1 (UMLStateDiagram)
+			FigTransition.java						1 (UMLStateDiagram)
+			ButtonActionNewCallEvent.java			1 (STATEDIAGRAM)
+			ButtonActionNewChangeEvent.java			1 (STATEDIAGRAM)
+			ButtonActionNewEvent.java				1 (STATEDIAGRAM)
+			ButtonActionNewSignalEvent.java			1 (STATEDIAGRAM)
+			ButtonActionNewTimeEvent.java			1 (STATEDIAGRAM)
+			DiagramFactory.java						227 (STATEDIAGRAM)
+			
+		AND ifdefs
+			DiagramFactory.java						231 (UMLStateDiagram)
+					
+		
+================================================================================================================================================		
+	
+3) Diagrama de Estados (UMLStateDiagram)
+	
+	Pacotes e classes não utilizadas: 
+		org.argouml.uml.diagram.state.*
+		/argouml-app/src/org/argouml/uml/diagram/state/ui/UMLStateDiagram.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoBehavioralFeatureToStateDiagram.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoStatemachineToDiagram.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoStateMachineToState.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoProjectToStateMachine.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoCompositeStateToSubvertex.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoStateToIncomingTrans.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoStateToOutgoingTrans.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoStateMachineToTransition.java
+		/argouml-app/src/org/argouml/ui/explorer/rules/GoStateMachineToTop.java
+		/argouml-app/src/org/argouml/uml/diagram/state/ui/StateDiagramPropPanelFactory.java
+		/argouml-app/src/org/argouml/uml/diagram/state/ui/InitStateDiagram.java
+		/argouml-app/src/org/argouml/uml/ui/ActionStateDiagram.java
+						
+	CIDE: Demais partes do código comentado com :  /* @#$-LPSFeature: UMLStateDiagram %INIT% .......... @#$-LPSFeature: UMLStateDiagram %END% */
+	
+	CC:
+		Defined: STATEDIAGRAM
+			//#if defined(STATEDIAGRAM)
+			//#endif
+		
+		Corpo de Método inteiro (//@#$ METHOD_BODY):
+			ActionStateDiagram.java		88
+			
+		If composto:
+			ExplorerPopup.java			279
+		
+================================================================================================================================================		
+	
+4) Logging
+
+	Projetos: 	argouml-app
+				argouml-core-diagrams-sequence2
+				argouml-core-model-euml
+				argouml-core-model-mdr
+				
+	CC:
+		Defined: LOGGING
+			//#if defined(LOGGING)
+			//#endif
+	
+	Alteração de código:	
+		ResourceLoaderWrapper.java	295
+		ZargoFilePersister.java		532
+		ExplorerTreeModel.java		459
+		FigAssociation.java			508
+		CoreHelperMDRImpl.java		3399, 3419, 3434, 3450
+		ModelEventPumpMDRImpl.java	784
+		
+	Corpo de Método inteiro:
+		CriticBrowserDialog.java				388
+		CriticBrowserDialog.java				491
+		MemberList.java							93
+		AbstractMessageNotationUml.java			761
+		ModelMemberFilePersister.java			176
+		ProfileConfigurationFilePersister.java	328
+		SAXParserBase.java						353, 364
+		MultiEditorPane.java					309, 326
+		StylePanel.java							146
+		DiagramAppearance.java					123
+		ImporterManager.java					78
+		AwtExceptionHandler.java				41
+		ModelEventPumpMDRImpl.java				888
+		
+	Método inteiro:	
+		ArgoParser.java
+	
+	Ifdef aninhado:	
+		ModelMemberFilePersister.java	371 (ACTIVITYDIAGRAM), 385 (STATEDIAGRAM)
+		XmiFilePersister.java			373	(COGNITIVE)
+		UMLStateDiagram.java			(STATEDIAGRAM)
+		MDRModelImplementation.java		511 (ACTIVITYDIAGRAM)
+		ProjectImpl.java				294, 318 (COGNITIVE)
+		

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: build.xml 14094 2008-02-09 14:30:05Z linus $
+
+    Ant build file for the Model subsystem interfaces.
+
+-->
+
+<project basedir="." default="compile" name="argouml model subsystem">
+  <!-- =================================================================== -->
+  <!-- Initialization target                                               -->
+  <!-- =================================================================== -->
+  <target name="init">
+
+    <!-- ============================================================= -->
+    <!-- when executed using target "dist-release", the properties     -->
+    <!-- "local.build.properties" and "user.build.properties"          -->
+    <!-- are set to "build.properties" so that there can be no         -->
+    <!-- possibility of overriding the default.                        -->
+    <!-- ============================================================= -->
+    <property name="local.build.properties" value="build.properties"/>
+    <property name="user.build.properties" 
+              value="${user.home}/argouml.build.properties"/>
+
+    <property file="${local.build.properties}"/>
+    <property file="${user.build.properties}"/>
+
+    <property name="build.dir" value="build"/>
+    <property name="build.classes" value="${build.dir}/classes"/>
+      
+    <property name="name" value="argouml-model"/>
+  
+    <property name="debug" value="yes"/>
+    <property name="deprecation" value="yes"/>
+    <property name="optimize" value="yes"/>
+  	
+	<!-- Properties for preprocess -->
+  	<property name="staging.dir" value="staging"/>  	
+  	<property file="../argouml-build/jpp-features.properties"/>  	
+  	<property name="argo.tools.dir" value = "../argouml-core-tools"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the source directory                                       -->
+  <!-- =================================================================== -->
+  <target name="compile"
+          depends="init"
+          description="Compile the sources.">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.classes}"/>
+
+    <javac debug="${debug}"
+           deprecation="${deprecation}"
+           destdir="${build.classes}"
+           includes="org/argouml/**/*.java"
+           optimize="${optimize}"
+           srcdir="src"
+           source="1.5"
+           target="1.5">
+       <compilerarg compiler="javac1.5" line="-Xlint:unchecked"/>
+    </javac>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the staging directory                                      -->
+  <!-- =================================================================== -->
+  <target name="jpp-compile" depends="jpp-preprocess"
+      description="Compile the preprocessed sources.">
+
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.classes}"/>
+    	
+    <echo message="Compiling the preprocessed sources in argouml-core-model"/>
+
+    <javac debug="${debug}" 
+    	   deprecation="${deprecation}"
+    	   destdir="${build.classes}"
+    	   includes="org/argouml/**/*.java"
+    	   optimize="${optimize}"
+    	   srcdir="${staging.dir}"
+    	   source="1.5"
+    	   target="1.5">
+      <compilerarg compiler="javac1.5" line="-Xlint:unchecked"/>
+    </javac>
+  </target>	
+	
+  <!-- =================================================================== -->
+  <!-- Creates the jar file                                                -->
+  <!-- =================================================================== -->
+  <target name="jar" depends="compile"
+          description="Build the ${name}.jar file.">
+    <jar basedir="${build.classes}"
+         excludes="*.txt,*.bat,*.xml,*.sh"
+	 includes="org/argouml/**"
+	 jarfile="${build.dir}/${name}.jar"/>
+  </target>
+	
+  <!-- =================================================================== -->
+  <!-- Creates the preprocessed jar file                                   -->
+  <!-- =================================================================== -->
+  <target name="jpp-jar" depends="jpp-compile"
+          description="Build the ${name}.jar file.">
+    <jar basedir="${build.classes}"
+         excludes="*.txt,*.bat,*.xml,*.sh"
+	 includes="org/argouml/**"
+	 jarfile="${build.dir}/${name}.jar"/>
+  </target>	
+
+  <!-- =================================================================== -->
+  <!-- Clean targets                                                       -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="init"
+          description="Clean out all built files.">
+    <delete dir="${build.dir}" quiet="true"/>
+  </target>
+	
+  <!-- =================================================================== -->
+  <!-- Clean preprocess targets                                            -->
+  <!-- =================================================================== -->
+  <target name="jpp-clean" depends="init"
+          description="Clean out all staging files.">
+
+  	<delete dir="${staging.dir}"/>
+  </target>
+	
+  <!-- =================================================================== -->
+  <!-- Prepares the staging directory                                        -->
+  <!-- =================================================================== -->
+  <target name="jpp-prepare" depends="init">
+    <!-- create directories -->
+    <echo message="Preparing the staging directory in argouml-core-model"/>
+    <mkdir dir="${staging.dir}"/>
+  	
+ </target>
+	
+  <!-- =================================================================== -->
+  <!-- Show de names of the features selected do preprocess                -->
+  <!-- =================================================================== -->
+  <target name="jpp-showselectedfeatures" depends="init"
+          description="Show the name of selected features.">
+  	
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"   	
+		classpath="${argo.tools.dir}/apache-ant-1.8.0/lib/ant-contrib-1.0b3.jar"/> 
+  	<echo message="Selected Features (argouml-core-model): "/>
+	<if>
+		<isset property="COGNITIVE"/>
+		<then>
+			<echo message="COGNITIVE"/>
+		</then>
+	</if>	
+	<if>
+		<isset property="LOGGING"/>
+		<then>
+			<echo message="LOGGING"/>
+		</then>
+	</if>  	
+	<if>
+		<isset property="ACTIVITYDIAGRAM"/>
+		<then>
+			<echo message="ACTIVITYDIAGRAM"/>
+		</then>
+	</if>  	  
+	<if>
+		<isset property="STATEDIAGRAM"/>
+		<then>
+			<echo message="STATEDIAGRAM"/>
+		</then>
+	</if> 
+	<if>
+		<isset property="SEQUENCEDIAGRAM"/>
+		<then>
+			<echo message="SEQUENCEDIAGRAM"/>
+		</then>
+	</if> 
+	<if>
+		<isset property="USECASEDIAGRAM"/>
+		<then>
+			<echo message="USECASEDIAGRAM"/>
+		</then>
+	</if>  	
+	<if>
+		<isset property="COLLABORATIONDIAGRAM"/>
+		<then>
+			<echo message="COLLABORATIONDIAGRAM"/>
+		</then>
+	</if>  	
+	<if>
+		<isset property="DEPLOYMENTDIAGRAM"/>
+		<then>
+			<echo message="DEPLOYMENTDIAGRAM"/>
+		</then>
+	</if>  	  	  	
+  </target>
+	
+  <!-- =================================================================== -->
+  <!-- Execute the PreProcess on source files.             				   -->
+  <!-- =================================================================== -->
+  <target name="jpp-preprocess" depends="jpp-prepare"
+    	  description="Execute de preprocessor on source files.">
+  	
+  	<echo message="Preprocessing argouml-core-model source files."/>
+	<antcall target="jpp-showselectedfeatures"/>
+  	<echo message="Starting preprocessing..."/>
+		
+    <taskdef resource="javapp-defs.xml" 
+    	classpath="${argo.tools.dir}/javapp-0.4/javapp.jar"/>
+  	
+	<javapp destdir="${staging.dir}" prefix="//#" verbose="false">
+	    <fileset dir="src">
+	    	<include name="**/*.java"/>
+	 	</fileset>		
+	</javapp>
+
+  </target>		
+	
+</project>
