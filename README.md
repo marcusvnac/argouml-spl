@@ -46,10 +46,10 @@ Marcus Vinicius Couto, Marco Tulio Valente, and Eduardo Figueiredo. <A HREF="htt
 
 <ul>
 
-<li><a href="https://github.com/ASERG-UFMG/argouml-spl/blob/master/argouml-spl_full.zip">Product 1: Full ArgoUML application</a> (including the four mentioned features) 
+<li><a href="https://github.com/ASERG-UFMG/argouml-spl/tree/master/products/argouml-spl_full.zip">Product 1: Full ArgoUML application</a> (including the four mentioned features) 
 
-<li><a href="https://github.com/ASERG-UFMG/argouml-spl/blob/master/argouml-spl_no-features.zip">Product 2: ArgoUML without the  mentioned features</a> 
+<li><a href="https://github.com/ASERG-UFMG/argouml-spl/tree/master/products/argouml-spl_no-features.zip">Product 2: ArgoUML without the  mentioned features</a> 
 		
-<li><a href="https://github.com/ASERG-UFMG/argouml-spl/blob/master/argouml-spl_no-cognitive.zip">Product 3: ArgoUML without Design Critics feature</a> 
+<li><a href="https://github.com/ASERG-UFMG/argouml-spl/tree/master/products/argouml-spl_no-cognitive.zip">Product 3: ArgoUML without Design Critics feature</a> 
 
 </ul>
